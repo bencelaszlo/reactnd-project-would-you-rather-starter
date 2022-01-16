@@ -22,8 +22,8 @@ function App() {
           <LoginForm redirectTarget={paths.ROOT} />
         </Route>
         <Route path={paths.NEW_QUESTION}>
-          <ProtectedWrapper>
-            <NewQuestion redirectTarget={paths.NEW_QUESTION} />
+          <ProtectedWrapper redirectTarget={paths.NEW_QUESTION}>
+            <NewQuestion />
           </ProtectedWrapper>
         </Route>
         <Route path={paths.LEADERBOARD}>
