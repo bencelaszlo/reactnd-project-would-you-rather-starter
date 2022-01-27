@@ -20,8 +20,9 @@ export const logoutCurrentUser = () => ({
 	type: actionTypes.LOGOUT_CURRENT_USER
 });
 
-export const addQuestion = ({ userId, optionOne, optionTwo }) => ({
+export const addQuestion = ({ id, userId, optionOne, optionTwo }) => ({
 	type: actionTypes.ADD_QUESTION,
+	id,
 	userId,
 	optionOne,
 	optionTwo

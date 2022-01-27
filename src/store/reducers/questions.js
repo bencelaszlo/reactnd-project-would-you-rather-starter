@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 function questions(state = [], action) {
 	switch (action.type) {
@@ -7,7 +7,7 @@ function questions(state = [], action) {
 	case "ADD_QUESTION":
 		return [
 			{
-				id: uuidv4(),
+				id: action.id,
 				optionOne: action.optionOne,
 				optionTwo: action.optionTwo,
 				userId: action.userId,

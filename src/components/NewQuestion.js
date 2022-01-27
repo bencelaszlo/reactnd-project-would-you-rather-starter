@@ -26,10 +26,10 @@ function NewQuestion () {
 
 			// console.log("handleQuestionSubmit", { userId: currentUserId, optionOne, optionTwo });
 
-			addQuestion({ userId: currentUserId, optionOne, optionTwo });
-			_saveQuestion({ author: currentUserId, optionOne, optionTwo }).then(
-				() => {
-					console.log("okay");
+			_saveQuestion({ author: currentUserId, optionOneText: optionOne, optionTwoText: optionTwo }).then(
+				(res) => {
+					console.log("okay", res);
+					addQuestion({ id: res.id, userId: currentUserId, optionOne, optionTwo });
 					history.push(ROOT);
 				}).catch((err) => console.log("err", err));
 		},
