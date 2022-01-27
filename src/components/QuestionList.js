@@ -11,16 +11,18 @@ function QuestionList () {
 	const questionFilter = useQuestionFilter();
 	const dispatch = useDispatch();
 
+	const sortQuestions = (a, b) => (b.creationDate - a.creationDate);
+
 	const filteredQuestions = useCallback(() => {
 		switch (questionFilter) {
 		case "all":
-			return questions;
+			return questions.sort(sortQuestions);
 		case "answered":
-			return questions.filter(question => question.answers.some(answer => answer.userId === currentUserId));
+			return questions.filter(question => question.answers.some(answer => answer.userId === currentUserId)).sort(sortQuestions);
 		case "unanswered":
-			return questions.filter(question => question.answers.every(answer => answer.userId !== currentUserId));
+			return questions.filter(question => question.answers.every(answer => answer.userId !== currentUserId)).sort(sortQuestions);
 		default:
-			return questions;
+			return questions.sort(sortQuestions);
 		}
 	}, [currentUserId, questionFilter, questions]);
 
