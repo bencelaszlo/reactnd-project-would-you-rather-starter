@@ -1,37 +1,37 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function questions(state = [], action) {
-    switch (action.type) {
-        case 'SET_QUESTIONS':
-            return action.questions ? action.questions : state;
-        case 'ADD_QUESTION':
-            return [
-                {
-                    id: uuidv4(),
-                    optionOne: action.optionOne,
-                    optionTwo: action.optionTwo,
-                    userId: action.userId,
-                    creationDate: new Date(),
-                    answers: []
-                },
-                ...state,
-            ];
-        case 'VOTE_QUESTION':
-            if (action.choice !== 'optionOne' && action.choice !== 'optionTwo') {
-                return state;
-            }
+	switch (action.type) {
+	case "SET_QUESTIONS":
+		return action.questions ? action.questions : state;
+	case "ADD_QUESTION":
+		return [
+			{
+				id: uuidv4(),
+				optionOne: action.optionOne,
+				optionTwo: action.optionTwo,
+				userId: action.userId,
+				creationDate: new Date(),
+				answers: []
+			},
+			...state,
+		];
+	case "VOTE_QUESTION":
+		if (action.choice !== "optionOne" && action.choice !== "optionTwo") {
+			return state;
+		}
 
-            return state.reduce((prev, current) => {
-                if (current.id === action.id) {
-                    const answersWithoutUsersOne = current.answers.filter(answer => answer.userId !== action.userId);
-                    current.answers = [...answersWithoutUsersOne, { id: action.id, choice: action.choice, userId: action.userId }]
-                }
+		return state.reduce((prev, current) => {
+			if (current.id === action.id) {
+				const answersWithoutUsersOne = current.answers.filter(answer => answer.userId !== action.userId);
+				current.answers = [...answersWithoutUsersOne, { id: action.id, choice: action.choice, userId: action.userId }];
+			}
 
-                return [...prev, current];
-            }, []);
-        default:
-            return state;
-    }
+			return [...prev, current];
+		}, []);
+	default:
+		return state;
+	}
 }
 
 export default questions;

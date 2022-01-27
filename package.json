@@ -24,7 +24,7 @@
     "start": "craco start",
     "build": "craco build",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js --fix",
+    "lint": "eslint src/*.js --fix",
     "test": "react-scripts test"
   },
   "eslintConfig": {
