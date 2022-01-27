@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 function NotFoundPage() {
 	const history = useHistory();
 
-	const handleGoBack = (event) => {
+	const handleGoBack = () => {
 		history.push("/");
 	};
 

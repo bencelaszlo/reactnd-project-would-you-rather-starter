@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import logo from "./static/user_0.png";
 
 let users = {
@@ -186,6 +187,9 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
 					}
 				}
 			};
+
+			console.log("questions[qid]", questions[qid]);
+			console.log("answer", answer);
 
 			questions = {
 				...questions,

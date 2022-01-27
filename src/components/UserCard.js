@@ -8,7 +8,7 @@ function UserCard ({ id, name, redirectTarget }) {
 	const { loginCurrentUser } = useActions();
 	const history = useHistory();
 
-	const handleLogin = (event) => {
+	const handleLogin = () => {
 		loginCurrentUser(id);
 		history.push(redirectTarget);
 	};

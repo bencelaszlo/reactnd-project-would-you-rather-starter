@@ -3,12 +3,11 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useActions, useCurrentUser } from "../hooks/store";
-// import { getUser } from "../store/actions";
 import { ROOT } from "../paths";
+import { _saveQuestion } from "../_DATA";
 
 function NewQuestion () {
 	const currentUserId = useCurrentUser();
-	// const userName = getUser(currentUserId);
 	const history = useHistory();
 	const { addQuestion } = useActions();
 	const [optionOne, setOptionOne] = useState("");
@@ -25,10 +24,14 @@ function NewQuestion () {
 				return;
 			}
 
-			console.log("handleQuestionSubmit", { userId: currentUserId, optionOne, optionTwo });
+			// console.log("handleQuestionSubmit", { userId: currentUserId, optionOne, optionTwo });
 
 			addQuestion({ userId: currentUserId, optionOne, optionTwo });
-			history.push(ROOT);
+			_saveQuestion({ author: currentUserId, optionOne, optionTwo }).then(
+				() => {
+					console.log("okay");
+					history.push(ROOT);
+				}).catch((err) => console.log("err", err));
 		},
 		[addQuestion, currentUserId, history, optionOne, optionTwo]
 	);

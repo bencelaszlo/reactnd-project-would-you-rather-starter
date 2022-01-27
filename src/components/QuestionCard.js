@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
 import { useActions, useCurrentUser, useLoginState } from "../hooks/store";
+import { _saveQuestionAnswer } from "../_DATA";
 
 function QuestionCard ({ id, optionOne, optionTwo, answers }) {
 	const optionOneAnswers = answers.filter(answer => answer.choice === "optionOne").length;
@@ -13,7 +14,21 @@ function QuestionCard ({ id, optionOne, optionTwo, answers }) {
 	const loginState = useLoginState();
 	const history = useHistory();
 
-	const handleVote = (event) => voteQuestion({ id, choice: event.target.value, userId: currentUserId });
+	const handleVote = (event) => {
+		const answer = event.target.value;
+		console.log("id", id);
+		console.log("currentUserId", currentUserId);
+		console.log("answer", answer);
+		_saveQuestionAnswer({ authedUser: currentUserId, qid: id, answer }).then(
+			() => {
+				console.log("okay");
+				voteQuestion({ id, choice: answer, userId: currentUserId });
+			}).catch(
+			(err) => {
+				console.log("err", err);
+			}
+		);
+	};
 	const getUsersVote = () => {
 		const usersAnswer = answers.find(answer => answer.userId === currentUserId);
 		if (!usersAnswer) {
