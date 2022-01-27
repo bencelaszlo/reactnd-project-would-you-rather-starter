@@ -29,9 +29,6 @@ function questions(state = [], action) {
 
                 return [...prev, current];
             }, []);
-
-        case 'GET_QUESTION':
-            return state.find(question => question.id === action.id);
         default:
             return state;
     }

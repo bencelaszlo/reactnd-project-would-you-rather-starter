@@ -9,6 +9,8 @@ import NewQuestion from './components/NewQuestion';
 import LeaderBoard from './components/LeaderBoard';
 import * as paths from './paths';
 import { useQuestionsFetch, useUsersFetch } from './hooks/api';
+import QuestionDetails from './components/QuestionDetails';
+import NotFoundPage from './components/NotFoundPage';
 
 function App() {
   useUsersFetch();
@@ -30,6 +32,14 @@ function App() {
           <ProtectedWrapper redirectTarget={paths.LEADERBOARD}>
             <LeaderBoard/>
           </ProtectedWrapper>
+        </Route>
+        <Route path={paths.QUESTION_DETAIL}>
+          <ProtectedWrapper redirectTarget={paths.QUESTION_DETAIL}>
+              <QuestionDetails/>
+          </ProtectedWrapper>
+        </Route>
+        <Route path={paths.NOT_FOUND}>
+          <NotFoundPage />
         </Route>
         <Route path={paths.ROOT}>
           <QuestionList />

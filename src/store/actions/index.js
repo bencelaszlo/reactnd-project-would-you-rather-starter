@@ -34,12 +34,12 @@ export const voteQuestion = ({ id, choice, userId }) => ({
     userId
 });
 
-export const getQuestion = (id) => ({
+/* export const getQuestion = (id) => ({
     type: actionTypes.GET_QUESTION,
     id
-});
+}); */
 
-export const setQuestionFilter = ({ filter }) => ({
+export const setQuestionFilter = (filter) => ({
     type: actionTypes.SET_QUESTION_FILTER,
     filter
 });

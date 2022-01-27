@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { useCurrentUser, useQuestions, useQuestionFilter } from '../hooks/store';
 import { setQuestionFilter } from '../store/actions';
@@ -8,9 +9,9 @@ function QuestionList (filter) {
   const questions = useQuestions();
   const currentUserId = useCurrentUser();
   const questionFilter = useQuestionFilter();
+  const dispatch = useDispatch();
 
   const filteredQuestions = useCallback(() => {
-    console.log('filteredQuestions called')
     switch (questionFilter) {
       case 'all':
         return questions;
@@ -23,21 +24,18 @@ function QuestionList (filter) {
     }
   }, [currentUserId, questionFilter, questions]);
 
-  console.log('questionFilter', questionFilter);
-  console.log('filteredQuestions', filteredQuestions);
-
   const hasQuestion =  Array.isArray(filteredQuestions()) && filteredQuestions().length;
 
-  const handleFilter = (event) => setQuestionFilter({ filter: event.target.value });
+  const handleFilter = (event) => dispatch(setQuestionFilter(event.target.value));
   
   return (
     <div className="mt-4 p-2">
+        <div className="btn-group">
+          <button className={"btn btn-outline btn-lg" + (questionFilter === "all" ? " btn-active" : "")} value="all" onClick={handleFilter}>All</button>
+          <button className={"btn btn-outline btn-lg" + (questionFilter === "answered" ? " btn-active" : "")} value="answered" onClick={handleFilter}>Answered</button>
+          <button className={"btn btn-outline btn-lg" + (questionFilter === "unanswered" ? " btn-active" : "")} value="unanswered" onClick={handleFilter}>Unanswered</button>
+        </div>
         { !hasQuestion && <h2>There are no questions yet.</h2> }
-        { hasQuestion && <div className="btn-group">
-          <button className="btn btn-outline btn-lg" value="all" onClick={handleFilter}>All</button>
-          <button className="btn btn-outline btn-lg" value="answered" onClick={handleFilter}>Answered</button>
-          <button className="btn btn-outline btn-lg" value="unanswered" onClick={handleFilter}>Unanswered</button>
-        </div>}
         {Array.isArray(filteredQuestions()) && filteredQuestions().map(question => <QuestionCard
                 key={question.id}
                 {...question}

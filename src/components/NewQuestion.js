@@ -1,13 +1,15 @@
 
 import React from 'react';
 import { useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useActions, useCurrentUser } from "../hooks/store";
 // import { getUser } from "../store/actions";
+import { ROOT } from "../paths";
 
 function NewQuestion () {
   const currentUserId = useCurrentUser();
   // const userName = getUser(currentUserId);
-
+  const history = useHistory();
   const { addQuestion } = useActions();
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
@@ -26,10 +28,9 @@ function NewQuestion () {
       console.log('handleQuestionSubmit', { userId: currentUserId, optionOne, optionTwo });
 
       addQuestion({ userId: currentUserId, optionOne, optionTwo });
-      setOptionOne('');
-      setOptionTwo('');
+      history.push(ROOT);
     },
-    [addQuestion, currentUserId, optionOne, optionTwo]
+    [addQuestion, currentUserId, history, optionOne, optionTwo]
   );
   
   const handleOptionOneChange = (event) => {

@@ -13,6 +13,9 @@ function UserCard ({ id, name, redirectTarget }) {
       history.push(redirectTarget);
   }
 
+  // const history = useHistory();
+
+
   return (
     <div className="card lg:card-side bordered mb-4">
       <div className="card-body">

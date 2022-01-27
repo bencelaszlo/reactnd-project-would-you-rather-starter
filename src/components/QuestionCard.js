@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import { useActions, useCurrentUser, useLoginState } from "../hooks/store";
 
@@ -10,6 +11,7 @@ function QuestionCard ({ id, optionOne, optionTwo, answers }) {
   const { voteQuestion } = useActions();
   const currentUserId = useCurrentUser();
   const loginState = useLoginState();
+  const history = useHistory();
 
   const handleVote = (event) => voteQuestion({ id, choice: event.target.value, userId: currentUserId });
   const getUsersVote = () => {
@@ -21,11 +23,16 @@ function QuestionCard ({ id, optionOne, optionTwo, answers }) {
     return usersAnswer.choice;
   };
 
+
+  const handleDetailsClick = (id) => {
+    history.push(`/questions/${id}`);
+  }
+
   return (
     <div className="card lg:card-side bordered mb-4">
       <div className="card-body">
         <div className="flex justify-center">
-          <h2 className="card-title">Would you rather...?</h2> 
+          <h2 className="card-title" onClick={() => handleDetailsClick(id)}>Would you rather...?</h2> 
         </div>
         <div className="grid grid-cols-2 gap-4">
         <div className="shadow stats">
