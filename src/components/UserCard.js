@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-
 import { useActions } from "../hooks/store";
 
 function UserCard ({ id, name, redirectTarget }) {
@@ -12,9 +11,6 @@ function UserCard ({ id, name, redirectTarget }) {
 		loginCurrentUser(id);
 		history.push(redirectTarget);
 	};
-
-	// const history = useHistory();
-
 
 	return (
 		<div className="card lg:card-side bordered mb-4">

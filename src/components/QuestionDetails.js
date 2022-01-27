@@ -1,5 +1,4 @@
 import React from "react";
-// import { useHistory } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 import { useActions, useCurrentUser, useQuestions, useUsers } from "../hooks/store";
@@ -12,12 +11,9 @@ function QuestionDetails () {
 	const users = useUsers();
 	const { voteQuestion } = useActions();
 	const currentUserId = useCurrentUser();
-	// const history = useHistory();
 
 	if (!question) {
-		// history.push('/404');
 		<NotFoundPage />;
-		// return (<h1>404 - Page Not Found</h1>);
 	}
 
 	const optionOneAnswers = question.answers.filter(answer => answer.choice === "optionOne").length;

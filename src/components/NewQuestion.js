@@ -24,8 +24,6 @@ function NewQuestion () {
 				return;
 			}
 
-			// console.log("handleQuestionSubmit", { userId: currentUserId, optionOne, optionTwo });
-
 			_saveQuestion({ author: currentUserId, optionOneText: optionOne, optionTwoText: optionTwo }).then(
 				(res) => {
 					console.log("okay", res);
