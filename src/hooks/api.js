@@ -1,77 +1,77 @@
-import { useEffect, useCallback } from 'react';
-import { _getQuestions, _getUsers } from '../_DATA';
-import { useActions } from './store';
-import logo from '../static/user_0.png'
+import { useEffect, useCallback } from "react";
+import { _getQuestions, _getUsers } from "../_DATA";
+import { useActions } from "./store";
+import logo from "../static/user_0.png";
 
 const useUsersFetch = async () => {
-  const { setUsers, loginCurrentUser } = useActions();
+	const { setUsers, loginCurrentUser } = useActions();
 
-  const fetchUsers = useCallback(() => {
-    _getUsers().then(users => {
-        const userValues = Object.values(users);
-        const mappedUsers = userValues.map(user => ({
-            id: user.id,
-            name: user.name,
-            avatarUrl: logo,
-            creationDate: new Date()
-        }));
+	const fetchUsers = useCallback(() => {
+		_getUsers().then(users => {
+			const userValues = Object.values(users);
+			const mappedUsers = userValues.map(user => ({
+				id: user.id,
+				name: user.name,
+				avatarUrl: logo,
+				creationDate: new Date()
+			}));
     
-        setUsers(mappedUsers);
-        loginCurrentUser(mappedUsers[0].id);
-    });
-  }, [loginCurrentUser, setUsers]);
+			setUsers(mappedUsers);
+			loginCurrentUser(mappedUsers[0].id);
+		});
+	}, [loginCurrentUser, setUsers]);
 
-  useEffect(
-      () => {
-        fetchUsers()
-    }, [fetchUsers]
-  )
-}
+	useEffect(
+		() => {
+			fetchUsers();
+		}, [fetchUsers]
+	);
+};
 
 const useUserManager = () => {
-  const { addUser, deleteUser } = useActions();
+	const { addUser, deleteUser } = useActions();
 
-  const create = useCallback(
-    (name) => {
-        addUser(name);
-    },
-    [addUser]
-  );
+	const create = useCallback(
+		(name) => {
+			addUser(name);
+		},
+		[addUser]
+	);
 
-  const deleteById = useCallback(
-    (id) => {
-        deleteUser(id);
-    },
-    [deleteUser]
-  );
+	const deleteById = useCallback(
+		(id) => {
+			deleteUser(id);
+		},
+		[deleteUser]
+	);
 
-  return { create, deleteById };
-}
+	return { create, deleteById };
+};
 
 const useQuestionsFetch = async () => {
-    const { setQuestions } = useActions();
+	const { setQuestions } = useActions();
   
-    const fetchQuestions = useCallback(() => {
-      _getQuestions().then(questions => {
-        const questionValues = Object.values(questions);
-        const mappedQuestions = questionValues.map(question => ({
-            id: question.id,
-            optionOne: question.optionOne.text,
-            optionTwo: question.optionTwo.text,
-            userId: question.author,
-            creationDate: new Date(question.timestamp),
-            answers: []
-        }));
+	const fetchQuestions = useCallback(() => {
+		_getQuestions().then(questions => {
+			const questionValues = Object.values(questions);
+			const mappedQuestions = questionValues.map(question => ({
+				id: question.id,
+				optionOne: question.optionOne.text,
+				optionTwo: question.optionTwo.text,
+				userId: question.author,
+				creationDate: new Date(question.timestamp),
+				answers: []
+			}));
 
-        setQuestions(mappedQuestions);
-        });
-    }, [setQuestions]);
+			setQuestions(mappedQuestions);
+		});
+	}, [setQuestions]);
   
-    useEffect(
-        () => {
-            fetchQuestions()
-      }, [fetchQuestions]
-    )
-  }
+	useEffect(
+		() => {
+			fetchQuestions();
+		}, [fetchQuestions]
+	);
+};
 
 export { useUsersFetch, useUserManager, useQuestionsFetch };
