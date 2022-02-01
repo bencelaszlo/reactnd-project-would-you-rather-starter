@@ -1,4 +1,4 @@
-function currentUser (state = "0", action) {
+function currentUser (state = null, action) {
 	switch (action.type) {
 	case "LOGIN_CURRENT_USER":
 		return action.id;

@@ -34,15 +34,20 @@ function App() {
 					</ProtectedWrapper>
 				</Route>
 				<Route path={paths.QUESTION_DETAIL}>
-					<ProtectedWrapper redirectTarget={paths.QUESTION_DETAIL}>
+					<ProtectedWrapper redirectTarget={paths.ROOT}>
 						<QuestionDetails/>
 					</ProtectedWrapper>
 				</Route>
 				<Route path={paths.NOT_FOUND}>
 					<NotFoundPage />
 				</Route>
-				<Route path={paths.ROOT}>
+				<Route exact path={paths.ROOT}>
 					<QuestionList />
+				</Route>
+				<Route path="*">
+					<ProtectedWrapper redirectTarget={paths.NOT_FOUND}>
+						<NotFoundPage />
+					</ProtectedWrapper>
 				</Route>
 			</Switch>
 		</div>

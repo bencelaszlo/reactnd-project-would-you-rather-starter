@@ -4,7 +4,7 @@ import { useActions } from "./store";
 import logo from "../static/user_0.png";
 
 const useUsersFetch = async () => {
-	const { setUsers, loginCurrentUser } = useActions();
+	const { setUsers } = useActions();
 
 	const fetchUsers = useCallback(() => {
 		_getUsers().then(users => {
@@ -17,9 +17,8 @@ const useUsersFetch = async () => {
 			}));
     
 			setUsers(mappedUsers);
-			loginCurrentUser(mappedUsers[0].id);
 		});
-	}, [loginCurrentUser, setUsers]);
+	}, [setUsers]);
 
 	useEffect(
 		() => {
