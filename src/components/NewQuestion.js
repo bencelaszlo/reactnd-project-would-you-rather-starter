@@ -13,9 +13,6 @@ function NewQuestion () {
 	const [optionOne, setOptionOne] = useState("");
 	const [optionTwo, setOptionTwo] = useState("");
 
-	console.log("optionOne", optionOne);
-	console.log("optionTwo", optionTwo);
-
 	const handleQuestionSubmit = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -26,7 +23,6 @@ function NewQuestion () {
 
 			_saveQuestion({ author: currentUserId, optionOneText: optionOne, optionTwoText: optionTwo }).then(
 				(res) => {
-					console.log("okay", res);
 					addQuestion({ id: res.id, userId: currentUserId, optionOne, optionTwo });
 					history.push(ROOT);
 				}).catch((err) => console.log("err", err));

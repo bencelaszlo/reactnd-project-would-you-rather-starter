@@ -16,12 +16,8 @@ function QuestionCard ({ id, optionOne, optionTwo, answers }) {
 
 	const handleVote = (event) => {
 		const answer = event.target.value;
-		console.log("id", id);
-		console.log("currentUserId", currentUserId);
-		console.log("answer", answer);
 		_saveQuestionAnswer({ authedUser: currentUserId, qid: id, answer }).then(
 			() => {
-				console.log("okay");
 				voteQuestion({ id, choice: answer, userId: currentUserId });
 			}).catch(
 			(err) => {
